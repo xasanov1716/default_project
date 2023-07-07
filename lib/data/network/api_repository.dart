@@ -1,17 +1,17 @@
 
-import '../../models/currency_model.dart';
+import '../../models/card_model.dart';
 import '../../models/universal_response.dart';
 import 'api_provider.dart';
 
-class CurrencyRepository {
+class CardRepository {
   final ApiProvider apiProvider;
 
-  CurrencyRepository({required this.apiProvider});
+  CardRepository({required this.apiProvider});
 
-  Future<List<CurrencyModel>> fetchCurrencies() async {
-    UniversalResponse universalResponse = await apiProvider.getAllCurrencies();
+  Future<List<BankModel>> fetchCard() async {
+    UniversalResponse universalResponse = await apiProvider.getAllCard();
     if (universalResponse.error.isEmpty) {
-      return universalResponse.data as List<CurrencyModel>;
+      return universalResponse.data as List<BankModel>;
     }
     return [];
   }

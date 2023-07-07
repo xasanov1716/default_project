@@ -2,19 +2,19 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../models/currency_model.dart';
+import '../../models/card_model.dart';
 import '../../models/universal_response.dart';
 
 class ApiProvider {
-  Future<UniversalResponse> getAllCurrencies() async {
-    Uri uri = Uri.parse("https://nbu.uz/en/exchange-rates/json/");
+  Future<UniversalResponse> getAllCard() async {
+    Uri uri = Uri.parse("https://banking-api.free.mockoapp.net/user_cards");
     try {
       http.Response response = await http.get(uri);
 
       if (response.statusCode == 200) {
         return UniversalResponse(
           data: (jsonDecode(response.body) as List?)
-              ?.map((e) => CurrencyModel.fromJson(e))
+              ?.map((e) => BankModel.fromJson(e))
               .toList() ??
               [],
         );
