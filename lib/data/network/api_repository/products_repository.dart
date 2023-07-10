@@ -18,7 +18,16 @@ class ProductRepository {
   }
 
   Future<List<ProductModel>> deleteProducts() async {
-    UniversalResponse universalResponse = await apiProvider.deleteProducts();
+    UniversalResponse universalResponse = await apiProvider.deleteProducts('12');
+    if (universalResponse.error.isEmpty) {
+      return universalResponse.data as List<ProductModel>;
+    }
+    return [];
+  }
+
+
+  Future<List<ProductModel>> sortProducts() async {
+    UniversalResponse universalResponse = await apiProvider.sortProducts('12');
     if (universalResponse.error.isEmpty) {
       return universalResponse.data as List<ProductModel>;
     }

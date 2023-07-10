@@ -11,7 +11,7 @@ class UserRepository {
   UserRepository({required this.apiProvider});
 
   Future<List<UserModel>> fetchUser() async {
-    UniversalResponse universalResponse = await apiProvider.getUser();
+    UniversalResponse universalResponse = await apiProvider.getAllUser();
     if (universalResponse.error.isEmpty) {
       return universalResponse.data as List<UserModel>;
     }
