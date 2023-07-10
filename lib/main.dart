@@ -1,4 +1,4 @@
-import 'package:api_default_project/ui/home/card_screen1.dart';
+import 'package:api_default_project/ui/home/screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
