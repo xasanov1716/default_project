@@ -1,33 +1,33 @@
 import 'package:api_default_project/models/products/raiting_model.dart';
 
 class ProductModel {
-  final int id;
+  final num id;
   final String title;
   final num price;
   final String description;
   final String category;
   final String image;
-  final Raiting rating;
+  final Rating? rating;
 
   ProductModel(
       {required this.id,
-      required this.title,
+        required this.title,
         required this.price,
-        required this.rating,
-      required this.description,
-      required this.category,
-      required this.image,
-      });
+        required this.category,
+        required this.description,
+        this.rating,
+        required this.image});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-        id: json['id'] as int? ?? 0,
-        title: json['title'] as String? ?? '',
-        price: json['price']as num? ?? 0,
-        description: json['description'] as String? ?? '',
-        category: json['category'] as String? ?? '',
-        image: json['image'] as String? ?? '',
-      rating: Raiting.fromJson(json['rate'])
-    );
+        id: json["id"] as num? ?? 0,
+        title: json["title"] as String? ?? "",
+        price: json["price"] as num? ?? 0,
+        category: json["category"] as String? ?? "",
+        description: json["description"] as String? ?? "",
+        rating: Rating.fromJson(json["rating"]),
+        image: json["image"] as String? ?? "");
   }
+
 }
+

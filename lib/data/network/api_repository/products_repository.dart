@@ -17,8 +17,9 @@ class ProductRepository {
     return [];
   }
 
-  Future<List<ProductModel>> deleteProducts() async {
-    UniversalResponse universalResponse = await apiProvider.deleteProducts('12');
+
+  Future<List<ProductModel>> deleteProducts(int id ) async {
+    UniversalResponse universalResponse = await apiProvider.deleteProducts(id);
     if (universalResponse.error.isEmpty) {
       return universalResponse.data as List<ProductModel>;
     }
@@ -26,11 +27,31 @@ class ProductRepository {
   }
 
 
-  Future<List<ProductModel>> sortProducts() async {
-    UniversalResponse universalResponse = await apiProvider.sortProducts('12');
+
+  Future<List<ProductModel>> sortProducts(String sort) async {
+    UniversalResponse universalResponse = await apiProvider.sortProducts(sort);
     if (universalResponse.error.isEmpty) {
       return universalResponse.data as List<ProductModel>;
     }
     return [];
   }
+
+
+  Future<List<ProductModel>> productById(int id) async {
+    UniversalResponse universalResponse = await apiProvider.getProductsBuyId(id);
+    if (universalResponse.error.isEmpty) {
+      return universalResponse.data as List<ProductModel>;
+    }
+    return [];
+  }
+
+
+  Future<List<ProductModel>> productByLimit(int limit) async {
+    UniversalResponse universalResponse = await apiProvider.getProductsBuyLimit(limit);
+    if (universalResponse.error.isEmpty) {
+      return universalResponse.data as List<ProductModel>;
+    }
+    return [];
+  }
+
 }

@@ -3,6 +3,8 @@ import 'package:api_default_project/data/network/api_repository/products_reposit
 import 'package:api_default_project/data/network/api_repository/user_repository.dart';
 import 'package:api_default_project/models/products/products_model.dart';
 import 'package:api_default_project/models/user/user_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
@@ -58,9 +60,10 @@ class _CardScreen1State extends State<CardScreen1> {
           : ListView(
         physics: const BouncingScrollPhysics(),
         children: List.generate(card.length, (index) => ListTile(
-          title: Text(card[index].title),
-          subtitle: Text("${card[index].id}"),
-          trailing: Image.network(card[index].image,height: 30,),
+          title: Text("${card[index].title}"),
+          onTap: (){},
+          subtitle: Text("${card[index].price}"),
+          trailing:  CachedNetworkImage(imageUrl: card[index].image,placeholder: (context,url) => CupertinoActivityIndicator(),errorWidget: (context,url,error) => Icon(Icons.error),)
         ))
       ),
     );
