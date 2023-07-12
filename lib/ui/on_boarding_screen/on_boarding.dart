@@ -13,24 +13,24 @@ class OnBoarding extends StatefulWidget {
   State<OnBoarding> createState() => _OnBoardingState();
 }
 
-ApiProvider apiProvider = ApiProvider();
 
-  late PrayerInfoModel prayer;
 class _OnBoardingState extends State<OnBoarding> {
 
-  void fetPrayer() async {
-    final response = await http.get(Uri.parse('https://islomapi.uz/api/present/day?region=Toshkent'));
-    if (response.statusCode == 200) {
-      prayer =  PrayerInfoModel.fromJson(jsonDecode(response.body));
-    }
-  }
 
+
+  PrayerInfoModel? prayer;
+  ApiProvider apiProvider = ApiProvider();
 
   @override
   void initState() {
-    fetPrayer();
-    print(prayer.region);
+    getPrayerData();
     super.initState();
+  }
+
+  Future<void> getPrayerData() async {
+    setState(() {});
+    prayer = await apiProvider.getPrayer();
+    setState(() {});
   }
 
   @override
@@ -38,7 +38,7 @@ class _OnBoardingState extends State<OnBoarding> {
     return Scaffold(
         body: Column(
             children: [
-              Text(" REGION ${prayer.region!}")
+              Text(" REGION ${prayer!.times.quyosh}")
             ]
 
     )
