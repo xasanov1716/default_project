@@ -1,4 +1,5 @@
-import 'package:api_default_project/ui/home/currencies_screen_1.dart';
+import 'package:api_default_project/ui/on_boarding_screen/on_boarding.dart';
+import 'package:api_default_project/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: CurrenciesScreen1(),
+      home: OnBoarding(),
     );
   }
 }
