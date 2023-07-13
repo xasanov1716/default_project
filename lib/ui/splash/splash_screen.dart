@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 13,
             ),
-            Text("Mening Qur'onim",style: TextStyle(color: Color(0xFF9543FF),fontWeight: FontWeight.w700,fontSize: 30),),
+           const Text("Mening Qur'onim",style: TextStyle(color: Color(0xFF9543FF),fontWeight: FontWeight.w700,fontSize: 30),),
               Text("Qur'onni osongina o'qing",style: TextStyle(fontSize: 15,color: Color(0xFFA8A8A8),fontWeight: FontWeight.w400),),
             SizedBox(height: 200,),
           ZoomTapAnimation(
