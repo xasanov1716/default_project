@@ -1,19 +1,17 @@
-
-
-
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-import 'package:http/http.dart';
+class TranslationProvider {
+  Future<String> getTranslation({required String query,required String firslanguage,required String lastlanguage}) async {
+    final url = Uri.parse('https://api.mymemory.translated.net/get?q=$query&langpair=$firslanguage|$lastlanguage');
+    final response = await http.get(url);
 
-import '../models/display_models.dart';
-
-class ApiProvider{
-
-  Future getRobot() async {
-    Response response = await get(Uri.parse('https://valorant-api.com/v1/agents'));
-    if(response.statusCode==200){
-      return Welcome.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final translatedText = jsonData['responseData']['translatedText'];
+      return translatedText;
+    } else {
+      throw Exception('Failed translation');
     }
-    throw Exception();
   }
 }
