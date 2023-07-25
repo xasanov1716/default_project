@@ -1,31 +1,35 @@
-import 'package:api_default_project/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_application/providers/calculator_provider.dart';
+import 'package:weather_application/ui/home/home_screen.dart';
 
-void main(){
-  runApp(MyApp());
+Future<void> main()async {
+  runApp( MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context)=>CalculatorProvider(),lazy: true,)
+  ],child: const MyApp(),));
 }
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context , child) {
+      builder: (BuildContext context, Widget? child) {
+
         return MaterialApp(
-          home: HomeScreen(),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          ),
+          home: const HomeScreen(),
         );
       },
-    );;
+    );
   }
 }
