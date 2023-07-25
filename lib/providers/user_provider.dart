@@ -1,19 +1,23 @@
 import 'package:api_default_project/data/models/user_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:api_default_project/data/network/api_provider.dart';
+import 'package:flutter/foundation.dart';
 
-import '../data/network/api_provider.dart';
-
-class UserProvider with ChangeNotifier{
-
+class UserProvider extends ChangeNotifier {
 
   bool isLoading = false;
-  Welcome? welcome;
 
-  void getMyData()async{
-    isLoading = true;
-    welcome = await ApiProvider.getData();
-    isLoading = false;
-    notifyListeners();
+  Welcome? _person;
+
+  Welcome? get person => _person;
+
+  void getPerson() async {
+    changeLoading();
+    _person = await ApiProvider.getData();
+    changeLoading();
   }
 
+  void changeLoading() {
+    isLoading = !isLoading;
+    notifyListeners();
+  }
 }
