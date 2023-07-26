@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class CalculatorProvider with ChangeNotifier {
+class CalculateProvider with ChangeNotifier {
   num answer = 0;
 
-  CalculatorProvider();
+  CalculateProvider();
 
   getAnswer() => answer;
 
@@ -30,7 +30,7 @@ class CalculatorProvider with ChangeNotifier {
   }
 
   void middleArithmetic(int a, int b) {
-    answer = (a + b) / 2;
+    answer = (a + b) ~/ 2;
     notifyListeners();
   }
 

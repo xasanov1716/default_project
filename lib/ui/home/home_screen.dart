@@ -12,10 +12,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<CalculatorProvider>(context, listen: false);
+    var provider = Provider.of<CalculateProvider>(context, listen: false);
 
     TextEditingController number1 = TextEditingController();
     TextEditingController number2 = TextEditingController();
+    final FocusNode numberOne = FocusNode();
+    final FocusNode numberTwo = FocusNode();
 
     return Scaffold(
       backgroundColor: Colors.greenAccent,
@@ -29,43 +31,29 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+          padding: const EdgeInsets.only(left: 30, right: 30,),
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 80),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.blue,
-                ),
-                child: Center(
-                  child: Consumer<CalculatorProvider>(
-                    builder: (context, answer, child) {
-                      return answer.getAnswer() != 0
-                          ? Text(
-                              answer.getAnswer().toString(),
-                              style: const TextStyle(
-                                  fontSize: 45, color: Colors.white),
-                            )
-                          : const SizedBox();
-                    },
-                  ),
-                ),
-              ),
               const SizedBox(
-                height: 100,
+                height: 60,
               ),
               TextField(
+                focusNode: numberOne,
+                onChanged: (number1){
+                  if(number1.length==5){
+                    numberOne.unfocus();
+                  }
+                },
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   LengthLimitingTextInputFormatter(5),
                 ],
                 controller: number1,
                 keyboardType: TextInputType.number,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
                   hintText: 'Number one',
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.black),
                   // label: Text("Enter number one",style: TextStyle(color: Colors.white),),
                   border: OutlineInputBorder(),
                   focusColor: Colors.red,
@@ -75,22 +63,51 @@ class HomeScreen extends StatelessWidget {
                 height: 40,
               ),
               TextField(
+                focusNode: numberTwo,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                   LengthLimitingTextInputFormatter(5),
                 ],
                 controller: number2,
+                onChanged: (number2){
+                  if(number2.length==5){
+                    numberTwo.unfocus();
+                  }
+                },
                 keyboardType: TextInputType.number,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
                     hintText: 'Number two',
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     // label: Text("Enter number two",style: TextStyle(color: Colors.white),),
                     border: OutlineInputBorder(),
                     focusColor: Colors.red),
               ),
               Row(
                 children: [
+                  Container(
+                    height: 60,
+                    margin: EdgeInsets.only(top: 32),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.black,
+                    ),
+                    child: Center(
+                      child: Consumer<CalculateProvider>(
+                        builder: (context, answer, child) {
+                          return answer.getAnswer() != 0
+                              ? Text(
+                            (answer.getAnswer() * 1).toString(),textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 32, color: Colors.white),
+                          )
+                              : const Text('0',style: const TextStyle(
+                              fontSize: 32, color: Colors.white),);
+                        },
+                      ),
+                    ),
+                  ),
                   const Spacer(),
                   ZoomTapAnimation(
                     onTap: () {
@@ -108,7 +125,6 @@ class HomeScreen extends StatelessWidget {
                         child: Center(
                             child: const Text(
                           "C",
-                          textAlign: TextAlign.right,
                           style: TextStyle(color: Colors.red, fontSize: 32),
                         ))),
                   ),

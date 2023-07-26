@@ -6,7 +6,7 @@ import 'package:weather_application/ui/home/home_screen.dart';
 
 Future<void> main()async {
   runApp( MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context)=>CalculatorProvider(),lazy: true,)
+    ChangeNotifierProvider(create: (context)=>CalculateProvider(),lazy: true,)
   ],child: const MyApp(),));
 }
 
