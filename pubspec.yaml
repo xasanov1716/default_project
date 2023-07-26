@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.6
   flutter_screenutil: ^5.8.4
   http: ^1.1.0
+  provider: ^6.0.5
   zoom_tap_animation: ^1.1.0
   cached_network_image: ^3.2.3
   shared_preferences: ^2.2.0

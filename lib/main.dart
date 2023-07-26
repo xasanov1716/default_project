@@ -1,9 +1,26 @@
+import 'package:api_default_project/data/network/api_provider.dart';
+import 'package:api_default_project/data/network/user_repository.dart';
 import 'package:api_default_project/home/home_screen.dart';
+import 'package:api_default_project/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
-void main(){
-  runApp(MyApp());
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(
+            userRepository: UserRepository(
+              apiProvider: ApiProvider(),
+            ),
+          ),
+        )
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 
@@ -23,6 +40,7 @@ class _MyAppState extends State<MyApp> {
       splitScreenMode: true,
       builder: (context , child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: HomeScreen(),
         );
       },
