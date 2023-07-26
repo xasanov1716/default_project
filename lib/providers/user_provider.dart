@@ -4,6 +4,10 @@ import 'package:flutter/foundation.dart';
 
 class UserProvider extends ChangeNotifier {
 
+
+  UserProvider(){
+    getPerson();
+  }
   bool isLoading = false;
 
   Welcome? _person;

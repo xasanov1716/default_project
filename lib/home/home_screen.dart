@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<UserProvider>(context,listen: false);
-    provider.getPerson();
     return Scaffold(
       appBar: AppBar(
         title: Text('User'),
