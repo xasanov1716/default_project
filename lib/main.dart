@@ -1,31 +1,22 @@
-import 'package:api_default_project/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main(){
-  runApp(MyApp());
+import 'dynamic_view_page.dart';
+
+void main() {
+  runApp(const MyApp());
 }
 
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context , child) {
-        return MaterialApp(
-          home: HomeScreen(),
-        );
-      },
-    );;
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const DynamicViewPage(),
+    );
   }
 }
