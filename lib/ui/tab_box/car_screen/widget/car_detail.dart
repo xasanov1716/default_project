@@ -12,7 +12,6 @@ class CarDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
         },icon: Icon(Icons.arrow_back),color: Colors.white,),
@@ -21,19 +20,22 @@ class CarDetail extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Spacer(),
+
             CachedNetworkImage(
               imageUrl: car.logo ?? "",
               width: 250,
               height: 250,
               placeholder: (context, url) => CupertinoActivityIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => Image.network('https://avatars.mds.yandex.net/i?id=44e2e6a9778189756ae450df5d1405e8d773a4b0-5238529-images-thumbs&n=13'),
             ),
-            const SizedBox(height: 10,),
+            // const SizedBox(height: 10,),
             Text("Price : ${car.averagePrice} \$",style: const TextStyle(fontSize: 24),),
             const SizedBox(height: 10,),
             Text("Established Year : ${car.establishedYear}",style: const TextStyle(fontSize: 24),),
+            SizedBox(height: 200,)
           ],
         ),
       ),

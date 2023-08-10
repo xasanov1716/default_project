@@ -64,7 +64,7 @@ class ApiService {
     final dio = Dio();
     Response response;
     try{
-      response = await dio.get("https://easyenglishuzb.free.mockoapp.net/companies/${random.nextInt(7)+1}");
+      response = await dio.get("https://easyenglishuzb.free.mockoapp.net/companies/6");
       if(response.statusCode==200){
         return CarItem.fromJson(response.data);
       }

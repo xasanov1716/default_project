@@ -1,7 +1,9 @@
 import 'package:api_default_project/ui/tab_box/car_screen/car_screen.dart';
-import 'package:api_default_project/ui/tab_box/companies_screen/car_item.dart';
 import 'package:api_default_project/ui/tab_box/countries_screen/countries_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'car_item_screen/car_item.dart';
 
 
 class TabBox extends StatefulWidget {
@@ -38,9 +40,9 @@ class _TabBoxState extends State<TabBox> {
         },
         currentIndex: currentIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.countertops_rounded),label: 'Countries'),
-          BottomNavigationBarItem(icon: Icon(Icons.category),label: 'Companies'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite),label: 'Car'),
+          BottomNavigationBarItem(icon: Icon(Icons.language),label: 'Countries'),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.car_fill),label: 'Car Item'),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.car_detailed),label: 'Car'),
         ],
       ),
     );
