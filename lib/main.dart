@@ -1,9 +1,9 @@
-import 'package:api_default_project/home/home_screen.dart';
+import 'package:api_default_project/ui/tab_box/tab_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main(){
-  runApp(MyApp());
+void main() {
+  runApp(const MyApp());
 }
 
 
@@ -23,7 +23,8 @@ class _MyAppState extends State<MyApp> {
       splitScreenMode: true,
       builder: (context , child) {
         return MaterialApp(
-          home: HomeScreen(),
+          debugShowCheckedModeBanner: false,
+          home: TabBox(),
         );
       },
     );;
