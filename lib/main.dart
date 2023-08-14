@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       splitScreenMode: true,
       builder: (context , child) {
         return MaterialApp(
-          home: HomeScreen(),
+          home: MapSample(),
         );
       },
     );;
