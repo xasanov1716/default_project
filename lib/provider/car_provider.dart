@@ -5,10 +5,10 @@ import '../data/network/api_service.dart';
 
 class CarProvider with ChangeNotifier{
 
-  CarProvider(){
-    getCar();
-  }
 
+ CarProvider(){
+   getCar();
+ }
 
   bool isLoading = false;
 

@@ -1,13 +1,9 @@
-import 'package:api_default_project/provider/car_item_provider.dart';
+import 'package:api_default_project/data/model/car_item.dart';
+import 'package:api_default_project/data/network/api_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../data/model/car_item.dart';
-import '../../../data/network/api_service.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 class CarItemScreen extends StatefulWidget {
   const CarItemScreen({super.key});
 
@@ -18,6 +14,26 @@ class CarItemScreen extends StatefulWidget {
 class _CarItemScreenState extends State<CarItemScreen> {
 
 
+  CarItem? carItem;
+
+  bool isLoading = false;
+
+  _getData() async {
+    setState(() {
+      isLoading = true;
+    });
+    carItem = await ApiService.getCarItem();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    _getData();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +43,19 @@ class _CarItemScreenState extends State<CarItemScreen> {
         title: const Text("Car",style: TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
-      body: context.read<CarItemProvider>().isLoading? Center(child: CupertinoActivityIndicator(),) : SingleChildScrollView(
+      body: isLoading? Center(child: CupertinoActivityIndicator(),) : SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 10,),
             CarouselSlider(
-              items: context.read<CarItemProvider>().carsModel!.carPics != null
-                  ? context.read<CarItemProvider>().carsModel!.carPics.map<Widget>((picUrl) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
-                  child: CachedNetworkImage(
-                    imageUrl: picUrl,
-                    placeholder: (context, url) => CupertinoActivityIndicator(radius: 20,),
-                    errorWidget: (context, url, error) => Icon(Icons.error,size: 50,),
-                  ),
+              items: carItem!.carPics != null
+                  ? carItem!.carPics.map<Widget>((picUrl) {
+                return CachedNetworkImage(
+                  imageUrl: picUrl,
+                  placeholder: (context, url) => CupertinoActivityIndicator(radius: 20,),
+                  errorWidget: (context, url, error) => Icon(Icons.error,size: 50,),
                 );
               }).toList()
                   : [],
@@ -65,23 +78,23 @@ class _CarItemScreenState extends State<CarItemScreen> {
               ),
             ),
             CachedNetworkImage(
-              imageUrl: context.read<CarItemProvider>().carsModel!.logo ?? "Image not found",
+              imageUrl: carItem!.logo ?? "Image not found",
               width: 60,
               height: 60,
               placeholder: (context, url) => CupertinoActivityIndicator(radius: 20,),
               errorWidget: (context, url, error) => Icon(Icons.error,size: 50,),
             ),
-            Text('Car Model: ${context.read<CarItemProvider>().carsModel!.carModel}',
+            Text('Car Model: ${carItem!.carModel}',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
-            Text('Established Year: ${context.read<CarItemProvider>().carsModel!.establishedYear}',
+            Text('Established Year: ${carItem!.establishedYear}',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
-            Text('Average Price: ${context.read<CarItemProvider>().carsModel!.averagePrice}\$',
+            Text('Average Price: ${carItem!.averagePrice}\$',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 10.0),
+              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
               child: Text(
-                'Description: ${context.read<CarItemProvider>().carsModel!.description}',
+                'Description: ${carItem!.description}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),

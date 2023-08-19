@@ -7,18 +7,16 @@ import '../data/network/api_service.dart';
 class CountryProvider with ChangeNotifier{
 
 
-CountryProvider(){
-  getCountry();
-}
+  CountryProvider(){
+    getCountry();
+  }
 
   bool isLoading = false;
-
 
 
   List<Country> countryModel = [];
   getCountry() async {
     notify(true);
-    notifyListeners();
     countryModel = await ApiService.getCountry();
       notify(false);
       notifyListeners();

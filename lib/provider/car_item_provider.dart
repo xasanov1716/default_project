@@ -12,6 +12,7 @@ class CarItemProvider with ChangeNotifier{
     getCarItem();
   }
 
+
   bool isLoading = false;
 
   CarItem? carsModel;
