@@ -1,5 +1,7 @@
+import 'package:api_default_project/cubits/button_cubit/button_cubit.dart';
 import 'package:api_default_project/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main(){
@@ -23,7 +25,10 @@ class _MyAppState extends State<MyApp> {
       splitScreenMode: true,
       builder: (context , child) {
         return MaterialApp(
-          home: HomeScreen(),
+          home: BlocProvider(
+            create: (_)=>ButtonCubit(),
+            child: HomeScreen(),
+          ),
         );
       },
     );;
