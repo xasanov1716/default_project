@@ -7,9 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 
-class TabBox extends StatelessWidget {
+class TabBox extends StatefulWidget {
   const TabBox({Key? key}) : super(key: key);
 
+  @override
+  State<TabBox> createState() => _TabBoxState();
+}
+
+class _TabBoxState extends State<TabBox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +33,9 @@ class TabBox extends StatelessWidget {
         currentIndex: context.read<NavigationBarCubit>().currentIndex,
         onTap: (index){context.read<NavigationBarCubit>().updateScreen(index: index);
         context.read<NavigationBarCubit>().currentIndex = index;
+        setState(() {
+
+        });
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.power),label: ''),

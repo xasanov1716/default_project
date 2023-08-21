@@ -25,9 +25,13 @@ class _PowScreenState extends State<PowScreen> {
         padding: const EdgeInsets.all(14),
         child: Column(
           children: [
-            UniversalTextField(controller: aController, hintext: 'Enter number', type: TextInputType.number, action: TextInputAction.done),
+            UniversalTextField(controller: aController, hintext: 'Enter number', type: TextInputType.number, action: TextInputAction.done, onChanged: (value) {
+              context.read<PowCubit>().initialA(value);
+            },),
             SizedBox(height: 24),
-            UniversalTextField(controller: bController, hintext: 'Enter number', type: TextInputType.number, action: TextInputAction.done),
+            UniversalTextField(controller: bController, hintext: 'Enter number', type: TextInputType.number, action: TextInputAction.done, onChanged: (value) {
+              context.read<PowCubit>().initialB(value);
+            },),
           Spacer(),
             Container(
               height: 60,
@@ -35,8 +39,11 @@ class _PowScreenState extends State<PowScreen> {
                 borderRadius: BorderRadius.circular(24),
                 color: Colors.grey
               ),
-              child: BlocBuilder<PowCubit, PowState>(builder: (context, state)=>Center(child: Text(state.result.toString()),))
-            ),
+              child: BlocBuilder<PowCubit, PowState>(builder: (context, state)=>Center(child: Text(
+                  context.read<PowCubit>().state.result != 0
+                      ? context.read<PowCubit>().state.result.toString()
+                      : "",))
+            ),),
             SizedBox(height: 56),
           ],
         ),
