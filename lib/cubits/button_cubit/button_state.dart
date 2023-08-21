@@ -1,13 +1,12 @@
-class ButtonState {
-  bool onChanged;
+class TaskState{
+  TaskState({required this.currentState});
+  final bool currentState;
 
-  ButtonState({this.onChanged = false});
+  TaskState copyWith({
+    bool? currentState,
 
-  ButtonState copyWith({
-   bool? onChanged,
   }) =>
-
-      ButtonState(
-        onChanged: onChanged ?? this.onChanged
+      TaskState(
+          currentState: currentState ?? this.currentState
       );
 }

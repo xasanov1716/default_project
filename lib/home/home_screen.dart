@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          BlocBuilder<ButtonCubit, ButtonState>(builder: (context, state){
+          BlocBuilder<ButtonCubit, TaskState>(builder: (context, state){
        return   SizedBox(
          height: 70,
          child: ListView(
@@ -31,13 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
              ...List.generate(5, (index) => ZoomTapAnimation(
                onTap: (){
                  isCheck = !isCheck;
-                 context.read<ButtonCubit>().getBool(isCheck);
+                 context.read<ButtonCubit>().changeState(index);
                },
                child: Container(
                  margin: EdgeInsets.all(16),
                  height: 60, width: 60,
                  decoration: BoxDecoration(
-                     color: context.read<ButtonCubit>().state.onChanged? Colors.blue: Colors.green,
+                     color: context.read<ButtonCubit>().indexes.contains(index)? Colors.blue: Colors.green,
                      borderRadius: BorderRadius.circular(16)
                  ),
                ),
