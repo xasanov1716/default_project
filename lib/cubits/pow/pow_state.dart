@@ -1,6 +1,8 @@
 class PowState{
   final int result;
- PowState({this.result = 0});
+  final int a;
+  final int b;
+ PowState({this.result = 0, this.a = 0,this.b = 0});
 
 
  PowState copyWith({
@@ -11,6 +13,8 @@ class PowState{
  
      PowState(
        result: result ?? this.result,
+       a: a ?? this.a,
+       b: b ?? this.b,
      );
 
  factory PowState.fromJson(Map<String, dynamic> json) => PowState(
@@ -20,7 +24,7 @@ class PowState{
  @override
  String toString() {
    return '''
-
+  
     result:$result
     ''';
  }

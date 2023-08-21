@@ -44,7 +44,6 @@ class _PowScreenState extends State<PowScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.send),
         onPressed: (){
-          context.read<PowCubit>().getPow(a: int.parse(aController.text),b:  int.parse(bController.text));
         },
       ),
     );

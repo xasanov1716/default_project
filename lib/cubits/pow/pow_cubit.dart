@@ -5,7 +5,15 @@ import 'dart:math' as math;
 class PowCubit extends Cubit<PowState> {
   PowCubit() : super(PowState());
 
-  void getPow({required int a,required int b}) {
-    emit(state.copyWith(result: math.pow(a, b).toInt()));
+  void initialA(int a) {
+    emit(state.copyWith(a:a));
+  }
+
+  void initialB(int b) {
+    emit(state.copyWith(b: b));
+  }
+
+  void getPow() {
+    emit(state.copyWith(result: math.pow(state.a, state.b).toInt()));
   }
 }

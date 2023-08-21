@@ -24,7 +24,11 @@ class TabBox extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
-        onTap: (index)=>context.read<NavigationBarCubit>().updateScreen(index: index),
+        unselectedItemColor: Colors.black,
+        currentIndex: context.read<NavigationBarCubit>().currentIndex,
+        onTap: (index){context.read<NavigationBarCubit>().updateScreen(index: index);
+        context.read<NavigationBarCubit>().currentIndex = index;
+        },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.power),label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.auto_fix_high),label: ''),
