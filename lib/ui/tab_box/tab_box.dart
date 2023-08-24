@@ -1,6 +1,6 @@
 import 'package:api_default_project/cubits/navigation_bar/navigation_bar_cubit.dart';
 import 'package:api_default_project/cubits/navigation_bar/navigation_bar_state.dart';
-import 'package:api_default_project/ui/tab_box/auth_screen/auth_screen.dart';
+import 'package:api_default_project/ui/tab_box/auth/auth_screen.dart';
 import 'package:api_default_project/ui/tab_box/pow_screen/pow_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +30,7 @@ class _TabBoxState extends State<TabBox> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.black,
-        currentIndex: context.read<NavigationBarCubit>().currentIndex,
+        currentIndex: context.watch()<NavigationBarCubit>().currentIndex,
         onTap: (index){context.read<NavigationBarCubit>().updateScreen(index: index);
         context.read<NavigationBarCubit>().currentIndex = index;
         setState(() {

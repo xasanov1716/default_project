@@ -14,7 +14,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AuthScreen'),
+        title: Text('HomeScreen'),
       ),
     );
   }

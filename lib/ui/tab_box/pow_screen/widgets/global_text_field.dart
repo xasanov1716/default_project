@@ -1,14 +1,14 @@
 import 'package:api_default_project/cubits/pow/pow_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 
 class UniversalTextField extends StatelessWidget {
-  const UniversalTextField({Key? key, required this.controller, required this.hintext, required this.type, required this.action, required this.onChanged}) : super(key: key);
+  const UniversalTextField({Key? key, required this.hintext, required this.type, required this.action, required this.onChanged}) : super(key: key);
 
 
-  final TextEditingController controller;
   final String hintext;
   final ValueChanged onChanged;
   final TextInputType type;
@@ -19,7 +19,9 @@ class UniversalTextField extends StatelessWidget {
     return TextField(
       cursorHeight: 20,
       keyboardType: type,
-      controller: controller,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+      ],
       onChanged: onChanged,
       decoration: InputDecoration(
         filled: true,

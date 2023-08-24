@@ -13,7 +13,7 @@ class NavigationBarCubit extends Cubit<TabState> {
       emit(PowScreenState());
     } else {
       currentIndex = index;
-      emit(LoginScreenState());
+      emit(AuthScreenState());
     }
   }
 }

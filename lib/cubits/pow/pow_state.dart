@@ -1,14 +1,14 @@
 class PowState{
-  final int result;
-  final int a;
-  final int b;
- PowState({this.result = 0, this.a = 0,this.b = 0});
+  final String result;
+  final double a;
+  final double b;
+ PowState({this.result = '', this.a = 0.0,this.b = 0.0});
 
 
  PowState copyWith({
-   int? a,
-   int? b,
-   int? result
+   double? a,
+   double? b,
+   String? result
  }) =>
  
      PowState(
@@ -18,7 +18,7 @@ class PowState{
      );
 
  factory PowState.fromJson(Map<String, dynamic> json) => PowState(
-   result: json["result"] as int? ?? 0,
+   result: json["result"] as String? ?? '',
  );
 
  @override

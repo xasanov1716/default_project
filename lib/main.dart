@@ -1,5 +1,5 @@
+import 'package:api_default_project/cubits/login/login_cubit.dart';
 import 'package:api_default_project/cubits/pow/pow_cubit.dart';
-import 'package:api_default_project/ui/tab_box/pow_screen/pow_screen.dart';
 import 'package:api_default_project/ui/tab_box/tab_box.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +29,9 @@ class App extends StatelessWidget {
       ),
       BlocProvider(
         create: (_)=> PowCubit(),lazy: true,
+      ),
+      BlocProvider(
+        create: (_)=> AuthCubit(),lazy: true,
       ),
     ], child: MyApp());
   }
