@@ -1,61 +1,79 @@
 import 'package:api_default_project/bloc/user/user_event.dart';
 import 'package:api_default_project/bloc/user/user_state.dart';
 import 'package:api_default_project/data/models/form_status.dart';
+import 'package:api_default_project/data/repositories/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/user_model.dart';
 
-class UserBloc extends Bloc<UsersEvent, UserState> {
-  UserBloc()
+class UserBloc extends Bloc<UsersEvent, UserSingleState> {
+  UserBloc({required this.userRepository})
       : super(
-            const UserState(status: FormStatus.pure, errorText: '', user: [])){
+            const UserSingleState(status: FormStatus.pure, errorText: '', user: [])) {
     on<AddUser>(_addUser);
     on<GetUser>(_getUser);
     on<UpdateUser>(_updateUser);
+    on<DeleteUser>(_deleteUser);
   }
 
+  UserRepository userRepository;
 
-
-  _addUser(AddUser event, Emitter<UserState> emit) async {
+  _addUser(AddUser event, Emitter<UserSingleState> emit) async {
     emit(state.copyWith(status: FormStatus.loading));
-    await Future.delayed(const Duration(seconds: 3));
-    if (event.userModel.toString().isNotEmpty) {
+    Future.delayed(const Duration(seconds: 3));
+    try{
+      await userRepository.addUser(userModel: event.userModel);
       emit(state.copyWith(
           status: FormStatus.success,
           user: [...state.user, event.userModel],
           errorText: 'User Added'));
-    }else{
-      emit(state.copyWith(status: FormStatus.failure,errorText: 'ERROR'));
+    }
+    catch(e) {
+      emit(state.copyWith(status: FormStatus.failure, errorText: e.toString()));
     }
   }
 
-  _getUser(GetUser event,Emitter<UserState> emit)async{
-    emit(state.copyWith(status: FormStatus.loading,errorText: 'Getting user'));
-    if(state.user.isNotEmpty){
+  _getUser(GetUser event, Emitter<UserSingleState> emit) async {
+    emit(state.copyWith(status: FormStatus.loading, errorText: 'Getting user'));
+    Future.delayed(const Duration(seconds: 3));
+    try{
+      await userRepository.getUsers();
+      emit(state.copyWith(
+          status: FormStatus.success,
+          errorText: 'Get User',
+          user: [...state.user]));
+
+    }
+    catch(e){
+      emit(state.copyWith(status: FormStatus.failure, errorText: e.toString()));
+    }
+  }
+
+  _updateUser(UpdateUser event, Emitter emit) async {
+    emit(
+        state.copyWith(status: FormStatus.loading, errorText: 'Updating User'));
+    try {
       await Future.delayed(const Duration(seconds: 2));
-      emit(state.copyWith(status: FormStatus.success,errorText: 'Get User',user: [...state.user]));
-    }else{
-      emit(state.copyWith(status: FormStatus.failure,errorText: 'ERROR'));
+      await userRepository.updateUser(userModel: event.updateUser);
+      emit(state.copyWith(status: FormStatus.success));
+    }
+    catch(e){
+      emit(state.copyWith(status: FormStatus.failure, errorText: e.toString()));
     }
   }
 
+  _deleteUser(DeleteUser event, Emitter<UserSingleState> emit) async {
+    emit(
+        state.copyWith(status: FormStatus.loading, errorText: 'Deleting User'));
+    await Future.delayed(const Duration(seconds: 2));
+    try{
+      await userRepository.deleteUser(id: event.userId);
+      await userRepository.getUsers();
+      emit(state.copyWith(status: FormStatus.success));
 
-  _updateUser(UpdateUser event, Emitter emit)async{
-    emit(state.copyWith(status: FormStatus.loading,errorText: 'Updating User'));
-    List<UserModel> currentUsers = state.user;
-    if(event.updateUser.toString().isNotEmpty){
-      await Future.delayed(const Duration(seconds: 2));
-      for (int i = 0; i < currentUsers.length; i++) {
-        if (event.updateUser.id == currentUsers[i].id) {
-          currentUsers[i] = event.updateUser;
-        }
-      }
-      emit(state.copyWith(status: FormStatus.success,user: currentUsers));
-    }else{
-      emit(state.copyWith(status: FormStatus.failure,errorText: 'ERROR'));
+    }
+    catch(e){
+      emit(state.copyWith(status: FormStatus.failure,errorText: e.toString()));
     }
   }
-
-
-
 }
