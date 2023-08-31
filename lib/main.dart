@@ -1,4 +1,5 @@
-import 'package:api_default_project/home/home_screen.dart';
+import 'package:api_default_project/player/all_audios_screen.dart';
+import 'package:api_default_project/player/player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,8 +23,9 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context , child) {
-        return MaterialApp(
-          home: HomeScreen(),
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: AllAudios(),
         );
       },
     );;
