@@ -1,31 +1,31 @@
-import 'package:api_default_project/home/home_screen.dart';
+import 'package:api_default_project/bloc/product/product_bloc.dart';
+import 'package:api_default_project/data/api/product_api_client.dart';
+import 'package:api_default_project/ui/product/product_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-void main(){
-  runApp(MyApp());
-}
+void main() => runApp(MyApp(client: ProductApiClient.create()));
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key, required this.client});
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final ProductApiClient client;
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context , child) {
-        return MaterialApp(
-          home: HomeScreen(),
-        );
-      },
-    );;
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => ProductBloc(
+            client: client,
+          )..add(ProductFetch()),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: ProductScreen(),
+      ),
+    );
   }
 }
