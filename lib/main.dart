@@ -1,9 +1,10 @@
-import 'package:api_default_project/home/home_screen.dart';
+import 'package:api_default_project/defination/defination_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 void main(){
-  runApp(MyApp());
+  runApp( const MyApp());
 }
 
 
@@ -22,8 +23,9 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context , child) {
-        return MaterialApp(
-          home: HomeScreen(),
+        return const  GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: DefinationScreen(),
         );
       },
     );;
