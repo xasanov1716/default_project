@@ -14,8 +14,6 @@ class DefinationScreen extends StatelessWidget {
 
     DefinitionController controller = Get.put(DefinitionController(apiService: ApiService()));
 
-TextEditingController text = TextEditingController();
-
     return KeyboardDismisser(
       child: Scaffold(
         appBar: AppBar(
@@ -31,7 +29,7 @@ TextEditingController text = TextEditingController();
                        Row(
                         children: [
                        SizedBox(width : 250,child: TextField(
-                        controller: text,
+                        controller: controller.text,
                         decoration: const InputDecoration(
                           filled: true,
                           hintStyle: TextStyle(
@@ -40,24 +38,24 @@ TextEditingController text = TextEditingController();
                             color: Colors.black,
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1),
+                            borderSide: BorderSide(color: Colors.black, width: 2),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1),
+                            borderSide: BorderSide(color: Colors.black, width: 2),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1),
+                            borderSide: BorderSide(color: Colors.black, width: 2),
                           ),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1),
+                            borderSide: BorderSide(color: Colors.black, width: 2),
                           ),
                         ),
                       )),
                           ZoomTapAnimation(
                             onTap: (){
-                              if(text.text.isNotEmpty){
-                              controller.getDefinition(word: text.text);
-                              text.clear();
+                              if(controller.text.text.isNotEmpty){
+                              controller.getDefinition(word: controller.text.text);
+                              controller.text.clear();
                               }
                             },
                             child: Container(
@@ -81,17 +79,17 @@ TextEditingController text = TextEditingController();
                                 margin: const EdgeInsets.all(10),
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
                                     color: Colors.grey,
                                     borderRadius: BorderRadius.circular(26)
                                 ),
-                                child: ListTile(
-                                  leading: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(controller.definition.first.word!),
-                                    ],
-                                  ),
-                                  title: Text(controller.definition.first.meanings!.first.definitions[index].definition,style: const TextStyle(color: Colors.white),),
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      subtitle: Text(controller.definition.first.license!.name,style: const TextStyle(color: Colors.black,fontSize: 26,letterSpacing: 0.5),),
+                                      title: Text(controller.definition.first.meanings!.first.definitions[index].definition,style: const TextStyle(color: Colors.white),),
+                                    ),
+                                  ],
                                 ),
                               );
                             })

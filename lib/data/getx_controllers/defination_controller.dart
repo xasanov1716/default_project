@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/defination/defination_model.dart';
@@ -9,6 +10,9 @@ class DefinitionController extends GetxController{
   final ApiService apiService;
 
   DefinitionController({required this.apiService});
+
+  TextEditingController text = TextEditingController();
+
 
   RxList<DefinationModel> definition = <DefinationModel>[].obs;
 
@@ -23,10 +27,15 @@ class DefinitionController extends GetxController{
 
     if (universalData.error.isEmpty) {
       definition.value = universalData.data as List<DefinationModel>;
-
+      Get.dialog( const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Succes'),
+        ],
+      ));
     } else {
       errorText.value = universalData.error;
-      Get.snackbar("Error", errorText.toString());
+      Get.snackbar("Error", errorText.value);
     }
   }
 
