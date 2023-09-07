@@ -1,20 +1,49 @@
-part of 'downloader_cubit.dart';
+// part of 'downloader_cubit.dart';
+//
+// class DownloaderState  {
+//   const DownloaderState({
+//     required this.progress,
+//     required this.myStream,
+//   });
+//
+//   final double progress;
+//   final StreamController<double> myStream;
+//
+//   DownloaderState copyWith({
+//     double? progress,
+//     StreamController<double>? myStream,
+//   }) =>
+//       DownloaderState(
+//         progress: progress ?? this.progress,
+//         myStream: myStream ?? this.myStream,
+//       );
+// }
 
-class DownloaderState  {
-  const DownloaderState({
+import 'package:equatable/equatable.dart';
+
+
+
+class DownLoaderState extends Equatable {
+  const DownLoaderState({
     required this.progress,
-    required this.myStream,
+    required this.newFileLocation,
   });
 
   final double progress;
-  final StreamController<double> myStream;
+  final String newFileLocation;
 
-  DownloaderState copyWith({
+  DownLoaderState copyWith({
     double? progress,
-    StreamController<double>? myStream,
+    String? newFileLocation,
   }) =>
-      DownloaderState(
+      DownLoaderState(
         progress: progress ?? this.progress,
-        myStream: myStream ?? this.myStream,
+        newFileLocation: newFileLocation ?? this.newFileLocation,
       );
+
+  @override
+  List<Object?> get props => [
+    progress,
+    newFileLocation,
+  ];
 }
